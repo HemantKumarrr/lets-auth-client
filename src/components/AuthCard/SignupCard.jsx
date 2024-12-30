@@ -21,7 +21,8 @@ const SignupCard = ({ loginToggle }) => {
     if (
       userData.username === "" ||
       userData.email === "" ||
-      userData.password === ""
+      userData.password === "" ||
+      userData.gender === ""
     )
       return toast.error("Fill all fields".toLowerCase(), {
         position: "top-right",
@@ -101,37 +102,22 @@ const SignupCard = ({ loginToggle }) => {
               placeholder="Password"
             />
             <div className="text-black w-full flex items-center justify-between ">
-              <p className="font-semibold py-2">Gender</p>
+              <p className="font-Popins text-gray-800 py-2 w-full">Gender</p>
               <div className="w-[50%] flex flex-col sm:flex-row items-center justify-between">
-                <div className="w-full">
-                  <input
+                <div className="w-[10rem] text-white font-Popins">
+                  <select
+                    name="gender"
+                    id="gender"
+                    defaultValue={""}
+                    className="w-full text-sm px-[0.8rem] py-1 text-black rounded-md outline-none bg-gray-300 cursor-pointer"
                     onChange={(e) =>
                       setUserData({ ...userData, gender: e.target.value })
                     }
-                    type="radio"
-                    id="male"
-                    name="gender"
-                    value="male"
-                    className="accent-cyan-600 cursor-pointer"
-                  />
-                  <label className="px-2 cursor-pointer" htmlFor="male">
-                    Male
-                  </label>
-                </div>
-                <div className="w-full">
-                  <input
-                    onChange={(e) =>
-                      setUserData({ ...userData, gender: e.target.value })
-                    }
-                    type="radio"
-                    id="female"
-                    name="gender"
-                    value="female"
-                    className="accent-cyan-600 cursor-pointer"
-                  />
-                  <label className="px-2 cursor-pointer" htmlFor="female">
-                    Female
-                  </label>
+                  >
+                    <option value="">Select gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                  </select>
                 </div>
               </div>
             </div>

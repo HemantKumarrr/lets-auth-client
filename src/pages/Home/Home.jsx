@@ -88,7 +88,7 @@ const Home = () => {
               </span>
             </div>
           </div>
-          <div className="text-[12px] absolute bottom-8 z-1 flex flex-col items-center justify-center">
+          <div className="text-[12px] font-Popins absolute bottom-8 z-1 flex flex-col items-center justify-center">
             <h1>Developed by Hemant kumar</h1>
             <p>{`@${d.getFullYear()}`}</p>
           </div>

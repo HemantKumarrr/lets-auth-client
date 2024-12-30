@@ -9,6 +9,7 @@ const Profile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.user.userInfo);
+  const localUser = localStorage.getItem("user");
 
   const fetchUser = async () => {
     try {
@@ -48,7 +49,17 @@ const Profile = () => {
     fetchUser();
   }, []);
 
-  return <div>{user && <ProfileCard />}</div>;
+  return (
+    <div>
+      {localUser ? (
+        <ProfileCard />
+      ) : (
+        <h1 className="w-full h-screen flex items-center justify-center text-3xl font-Popins">
+          Loading...
+        </h1>
+      )}
+    </div>
+  );
 };
 
 export default Profile;

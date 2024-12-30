@@ -1,6 +1,9 @@
 import { MdOutlineEdit } from "react-icons/md";
 import { Bounce, toast } from "react-toastify";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "../../store/features/authSlice";
+import ProfileLoader from "./ProfileLoader";
 
 const validTypes = ["image/jpg", "image/jpeg", "image/png"];
 
@@ -8,6 +11,7 @@ const ProfileImage = ({ imageUrl, setOpenImage }) => {
   const [file, setFile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [imageChangeToggle, setIsImageToggle] = useState(false);
+  const dispatch = useDispatch();
 
   const createFormData = (objects) => {
     const data = new FormData();
@@ -49,6 +53,7 @@ const ProfileImage = ({ imageUrl, setOpenImage }) => {
         }
       );
       const response = await uploadStart.json();
+      dispatch(setCredentials(response.user));
       toast.success(response.message, {
         position: "top-right",
         autoClose: 3000,
@@ -69,9 +74,15 @@ const ProfileImage = ({ imageUrl, setOpenImage }) => {
   };
 
   return (
-    <div className="profile-image relative p-1 rounded-full bg-gradient-to-tl from-pink-500 to-blue-500">
+    <div
+      className={`profile-image relative p-1 rounded-full ${
+        isLoading ? "" : "bg-gradient-to-tl from-pink-500 to-blue-5001"
+      } `}
+    >
       {isLoading ? (
-        <h1 className="px-4">Updating image...</h1>
+        <div className="">
+          <ProfileLoader />
+        </div>
       ) : (
         <>
           <img
